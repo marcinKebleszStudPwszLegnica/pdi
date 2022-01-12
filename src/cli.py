@@ -8,6 +8,13 @@ def get_searched_phrase(argv):
     return argv[1]
 
 
+def compare_two_streets(argv):
+    if len(argv) < 3:
+        exit("Try to pass arguments: python3 task2.py Legnicka Wałbrzyska")
+
+    return argv
+
+
 def get_mapbox(argv):
     if len(argv) == 3:
         return Map(argv[2])

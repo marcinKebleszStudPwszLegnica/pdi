@@ -13,6 +13,7 @@ class Street(object):
         self.proper_name = properties.split(";")[7]
         self.city_id = properties.split(";")[4]
         self.city = None
+        self.voivodeship_id = properties.split(";")[0]
 
     def get_full_name(self):
         name = self.prefix + " " + self.additional_name + " " + self.proper_name
