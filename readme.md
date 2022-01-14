@@ -6,14 +6,14 @@ Powyższy program jest prostą przykładową aplikacją do wstępnej analizy dan
 * opcjonalnie token [Mapbox](https://www.mapbox.com/) do generowania map
 
 ### Uruchomienie
-python3 task1.py <fraza>
-python3 task2.py <fraza> <token>
-python3 task3.py 
-python3 task4.py <ulica> <ulica>
-python3 task5.py 
-python3 task6.py 
-python3 task7.py 
-python3 task8.py 
+* python3 task1.py "fraza"
+* python3 task2.py "fraza" "token"
+* python3 task3.py 
+* python3 task4.py "ulica" "ulica"
+* python3 task5.py 
+* python3 task6.py 
+* python3 task7.py 
+* python3 task8.py 
 
 ## Źródła
 Pliki TERYT zostały pobrane 9 października 2021 roku z poniższego adresu:
