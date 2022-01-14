@@ -78,7 +78,7 @@ class Streets(object):
 
     def take_streets(self):
         counts = dict()
-        with open("data/ULIC_Adresowy_2021-10-09.csv", encoding="utf-8") as fp:
+        with open(self.file, encoding="utf-8") as fp:
             lines = fp.readlines()
             for line in lines:
                 properties = line.split(';')
@@ -96,23 +96,53 @@ class Streets(object):
         counts = dict()
         with open(self.file, encoding="utf-8") as fp:
             lines = fp.readlines()
-            for line in lines:
+            for line in lines[1:-1]:
                 properties = line.split(';')
                 if len(properties) == 10:
-                    street_full_name = properties[6] + " " + properties[8] + " " + properties[7]
-                    street_full_name = " ".join(street_full_name.split())
-
-                    street_name = properties[7]
-
-                    for i in data:
-                        if i['id_number'] == 'V410Z8':
-                            print(i['birthdate'])
-                            print(i['name'])
-                            break
-
-                    if street_name in counts:
-                        counts[street_full_name] += 1
+                    map_data = properties[4] + ";" + properties[7]
+                    if map_data in counts:
+                        counts[map_data] += 1
                     else:
-                        counts[street_full_name] = 1
+                        counts[map_data] = 1
 
-        return sorted(counts.items(), key=lambda x: x[1], reverse=True)[0]
+            for key, value in counts.items():
+                if value > 2:
+                    for line in lines[1:-1]:
+                        properties = line.split(';')
+                        if len(properties) == 10:
+                            if (properties[4] + ";" + properties[7]) == key:
+                                full_name = properties[6] + " " + properties[8] + " " + properties[7]
+                                print(self.cities.find_by_id(properties[4]), full_name)
+
+    def find_the_city_with_the_most_streets(self):
+        counts = dict()
+        with open(self.file, encoding="utf-8") as fp:
+            lines = fp.readlines()
+            for line in lines[1:-1]:
+                properties = line.split(';')
+                if len(properties) == 10:
+                    city = properties[4]
+                    if city in counts:
+                        counts[city] += 1
+                    else:
+                        counts[city] = 1
+
+        results = sorted(counts.items(), key=lambda x: x[1], reverse=True)[:10]
+        for city, number in results:
+            print(self.cities.find_by_id(city), number)
+
+    def find_prefixes(self):
+        counts = dict()
+        with open(self.file, encoding="utf-8") as fp:
+            lines = fp.readlines()
+            for line in lines[1:-1]:
+                properties = line.split(';')
+                if len(properties) == 10:
+                    prefix = properties[6]
+                    if prefix in counts:
+                        counts[prefix] += 1
+                    else:
+                        counts[prefix] = 1
+
+        return sorted(counts.items(), key=lambda x: x[1], reverse=True)
+
